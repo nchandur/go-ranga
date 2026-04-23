@@ -8,7 +8,6 @@ func TestSquareValid(t *testing.T) {
 		expected    bool
 	}{
 		{square: A1, expected: true},
-		{square: Offboard, expected: true},
 		{square: NoSquare, expected: true},
 		{square: 1000, expected: false},
 		{square: -10, expected: false},

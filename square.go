@@ -76,7 +76,6 @@ const (
 	H8 Square = 98
 
 	NoSquare Square = 99
-	Offboard Square = 120
 )
 
 func (s *Square) IsOnBoard() bool {

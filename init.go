@@ -13,7 +13,7 @@ func initSquareIndices() {
 	}
 
 	for idx := range 64 {
-		Sq64To120[idx] = Offboard
+		Sq64To120[idx] = NoSquare
 	}
 
 	for rank := Rank1; rank <= Rank8; rank++ {

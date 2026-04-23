@@ -16,6 +16,7 @@ const (
 	bR
 	bQ
 	bK
+	Offboard
 )
 
 func (p *Piece) Valid() bool {
