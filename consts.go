@@ -20,3 +20,9 @@ const PieceChar = ".PNBRQKpnbrqk"
 const SideChar = "wb-"
 const RankChar = "12345678"
 const FileChar = "abcdefgh"
+
+var PieceBig = [13]bool{false, false, true, true, true, true, true, false, true, true, true, true, true}
+var PieceMajor = [13]bool{false, false, false, false, true, true, true, false, false, false, true, true, true}
+var PieceMinor = [13]bool{false, false, true, true, false, false, false, false, true, true, false, false, false}
+var PieceValue = [13]int{0, 100, 325, 325, 550, 1000, 50000, 100, 325, 325, 550, 1000, 500000}
+var PieceColor = [13]Color{Both, White, White, White, White, White, White, Black, Black, Black, Black, Black, Black}

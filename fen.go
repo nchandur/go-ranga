@@ -5,14 +5,14 @@ import (
 	"strings"
 )
 
-const START = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+const START string = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
 func (b *Board) ParseFen(fen string) error {
 	b.Reset()
 
 	parts := strings.Fields(fen)
 	if len(parts) < 4 {
-		return fmt.Errorf("invalid FEN string: expected at least 4 parts, got %d", len(parts))
+		return fmt.Errorf("failed to parse FEN: expected at least 4 parts, got %d", len(parts))
 	}
 
 	rank := Rank8
@@ -55,14 +55,14 @@ func (b *Board) ParseFen(fen string) error {
 			piece = Empty
 			count = int(char - '0')
 		default:
-			return fmt.Errorf("invalid FEN character: %c", char)
+			return fmt.Errorf("failed to parse FEN. invalid FEN character: %c", char)
 		}
 
 		for i := 0; i < count; i++ {
 			sq64 := int(rank)*8 + int(file)
 			sq120, err := SQ120(Square(sq64))
 			if err != nil {
-				return err
+				return fmt.Errorf("failed to parse FEN: %v", err)
 			}
 
 			if piece != Empty {
@@ -101,7 +101,11 @@ func (b *Board) ParseFen(fen string) error {
 	}
 
 	if b.PositionKey, err = b.GeneratePositionKey(); err != nil {
-		return err
+		return fmt.Errorf("failed to parse FEN: %v", err)
+	}
+
+	if err := b.UpdatePieceList(); err != nil {
+		return fmt.Errorf("failed to parse FEN: %v", err)
 	}
 
 	return nil
