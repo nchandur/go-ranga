@@ -78,3 +78,44 @@ const (
 	NoSquare Square = 99
 	Offboard Square = 120
 )
+
+func (s *Square) Valid() bool {
+
+	if *s >= A1 && *s <= H1 {
+		return true
+	}
+
+	if *s >= A2 && *s <= H2 {
+		return true
+	}
+
+	if *s >= A3 && *s <= H3 {
+		return true
+	}
+
+	if *s >= A4 && *s <= H4 {
+		return true
+	}
+
+	if *s >= A5 && *s <= H5 {
+		return true
+	}
+
+	if *s >= A6 && *s <= H6 {
+		return true
+	}
+
+	if *s >= A7 && *s <= H7 {
+		return true
+	}
+
+	if *s >= A8 && *s <= H8 {
+		return true
+	}
+
+	if *s == NoSquare || *s == Offboard {
+		return true
+	}
+
+	return false
+}

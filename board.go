@@ -2,7 +2,7 @@ package main
 
 type Board struct {
 	Pieces [BOARD_SQ_NUM]Square
-	Pawns  [3]uint64
+	Pawns  [3]Bitboard
 
 	KingsSquare [2]Square
 
@@ -21,6 +21,10 @@ type Board struct {
 	MinorPiece [3]int
 
 	History [MAX_GAMES_MOVES]History
+
+	// 13: piece number each side
+	// 10: squares on which pieces exist
+	PieceList [13][10]int
 }
 
 type History struct {

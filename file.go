@@ -13,3 +13,8 @@ const (
 	FileH
 	FileNone
 )
+
+func (f *File) Valid() bool {
+	return *f >= FileA && *f <= FileH
+
+}

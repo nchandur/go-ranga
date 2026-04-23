@@ -13,3 +13,8 @@ const (
 	Rank8
 	RankNone
 )
+
+func (r *Rank) Valid() bool {
+	return *r >= Rank1 && *r <= Rank8
+
+}
