@@ -15,3 +15,8 @@ var ClearMask [64]uint64
 var PieceKeys [13][120]uint64
 var SideKey uint64
 var CastleKey [16]uint64
+
+const PieceChar = ".PNBRQKpnbrqk"
+const SideChar = "wb-"
+const RankChar = "12345678"
+const FileChar = "abcdefgh"

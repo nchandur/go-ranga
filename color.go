@@ -7,3 +7,16 @@ const (
 	Black
 	Both
 )
+
+func (c *Color) String() string {
+	if *c == White {
+		return "W"
+	}
+
+	if *c == Black {
+		return "B"
+	}
+
+	return "."
+
+}

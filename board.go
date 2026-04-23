@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type Board struct {
 	Pieces [BOARD_SQ_NUM]Piece
@@ -134,4 +137,37 @@ func (b *Board) GeneratePositionKey() (uint64, error) {
 	res ^= CastleKey[b.CastleBit]
 
 	return res, nil
+}
+
+func (b *Board) String() string {
+	var builder strings.Builder
+
+	fmt.Fprintf(&builder, "\n====Game Board====\n")
+
+	for rank := Rank8; rank >= Rank1; rank-- {
+		fmt.Fprintf(&builder, "%d  ", rank+1)
+
+		for file := FileA; file <= FileH; file++ {
+			sq, _ := FRTo120(file, rank)
+			piece := b.Pieces[sq]
+
+			fmt.Fprintf(&builder, "%3s ", &piece)
+		}
+		fmt.Fprintf(&builder, "\n")
+	}
+
+	fmt.Fprintf(&builder, "\n   ")
+
+	for file := FileA; file <= FileH; file++ {
+		fmt.Fprintf(&builder, "%3c", 'a'+file)
+	}
+
+	fmt.Fprintf(&builder, "\n")
+
+	fmt.Fprintf(&builder, "Side: %s", &b.Side)
+	fmt.Fprintf(&builder, "En Passant: %s", &b.EnPassant)
+	fmt.Fprintf(&builder, "Castle: %s", &b.CastleBit)
+	fmt.Fprintf(&builder, "Position Key: %x\n", b.PositionKey)
+
+	return builder.String()
 }
