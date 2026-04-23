@@ -8,3 +8,7 @@ const (
 	BKCA CastleBit = 4
 	BQCA CastleBit = 8
 )
+
+func (c *CastleBit) Valid() bool {
+	return *c >= 0 && *c < 16
+}
