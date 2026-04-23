@@ -76,10 +76,9 @@ const (
 	H8 Square = 98
 
 	NoSquare Square = 99
-	Offboard Square = 120
 )
 
-func (s *Square) Valid() bool {
+func (s *Square) IsOnBoard() bool {
 
 	if *s >= A1 && *s <= H1 {
 		return true
@@ -113,9 +112,9 @@ func (s *Square) Valid() bool {
 		return true
 	}
 
-	if *s == NoSquare || *s == Offboard {
-		return true
-	}
-
 	return false
+}
+
+func (s *Square) Valid() bool {
+	return *s >= 0 && *s < BOARD_SQ_NUM
 }

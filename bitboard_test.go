@@ -48,7 +48,6 @@ func TestBitboardSetBit(t *testing.T) {
 	}{
 		{board: 0x0, square: A1, expected: 0x1, expectedErr: false},
 		{board: 0x8, square: G1, expected: 0x48, expectedErr: false},
-		{board: 0xA, square: Offboard, expected: 0xA, expectedErr: true},
 	}
 
 	for _, test := range tests {
@@ -76,7 +75,6 @@ func TestBitboardClearBit(t *testing.T) {
 	}{
 		{board: 0x1, square: A1, expected: 0x0, expectedErr: false},
 		{board: 0x8, square: G1, expected: 0x8, expectedErr: false},
-		{board: 0xA, square: Offboard, expected: 0xA, expectedErr: true},
 		{board: 0xF, square: D1, expected: 0x7, expectedErr: false},
 	}
 
