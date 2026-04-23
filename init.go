@@ -29,6 +29,21 @@ func initSquareIndices() {
 
 }
 
+func initBitMasks() {
+
+	for idx := range 64 {
+		SetMask[idx] = uint64(0)
+		ClearMask[idx] = uint64(0)
+	}
+
+	for idx := range 64 {
+		SetMask[idx] = uint64(1) << idx
+		ClearMask[idx] = ^SetMask[idx]
+	}
+
+}
+
 func init() {
 	initSquareIndices()
+	initBitMasks()
 }
