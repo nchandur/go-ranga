@@ -103,7 +103,7 @@ func (b *Board) GeneratePositionKey() (uint64, error) {
 
 		if piece != Empty {
 			if !piece.Valid() {
-				return uint64(0), fmt.Errorf("failed to generate position key. invalid piece: %d", piece)
+				return uint64(0), fmt.Errorf("failed to generate position key. invalid piece: %s", &piece)
 			}
 			res ^= PieceKeys[piece][sq]
 		}
@@ -115,11 +115,11 @@ func (b *Board) GeneratePositionKey() (uint64, error) {
 
 	if b.EnPassant != NoSquare {
 		if !b.EnPassant.Valid() {
-			return uint64(0), fmt.Errorf("failed to generate position key. invalid en passant square %d", b.EnPassant)
+			return uint64(0), fmt.Errorf("failed to generate position key. invalid en passant square %s", &b.EnPassant)
 		}
 
 		if !b.EnPassant.IsOnBoard() {
-			return uint64(0), fmt.Errorf("failed to generate position key. en passant square %d is offboard", b.EnPassant)
+			return uint64(0), fmt.Errorf("failed to generate position key. en passant square %s is offboard", &b.EnPassant)
 		}
 
 		if FileBoard[b.EnPassant] != 3 && FileBoard[b.EnPassant] != 6 {
@@ -131,7 +131,7 @@ func (b *Board) GeneratePositionKey() (uint64, error) {
 	}
 
 	if !b.CastleBit.Valid() {
-		return uint64(0), fmt.Errorf("failed to generate position key. invalid castle bit: %d", b.CastleBit)
+		return uint64(0), fmt.Errorf("failed to generate position key. invalid castle bit: %s", &b.CastleBit)
 	}
 
 	res ^= CastleKey[b.CastleBit]
