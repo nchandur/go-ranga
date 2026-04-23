@@ -101,7 +101,7 @@ func (b *Board) GeneratePositionKey() (uint64, error) {
 	for sq := range BOARD_SQ_NUM {
 		piece := b.Pieces[sq]
 
-		if piece != Empty {
+		if piece != Empty && piece != Offboard {
 			if !piece.Valid() {
 				return uint64(0), fmt.Errorf("failed to generate position key. invalid piece: %s", &piece)
 			}
@@ -142,32 +142,32 @@ func (b *Board) GeneratePositionKey() (uint64, error) {
 func (b *Board) String() string {
 	var builder strings.Builder
 
-	fmt.Fprintf(&builder, "\n====Game Board====\n")
+	builder.WriteString("\n  +---------------------------------+\n")
 
 	for rank := Rank8; rank >= Rank1; rank-- {
-		fmt.Fprintf(&builder, "%d  ", rank+1)
+		fmt.Fprintf(&builder, "%d | ", rank+1)
 
 		for file := FileA; file <= FileH; file++ {
 			sq, _ := FRTo120(file, rank)
 			piece := b.Pieces[sq]
 
-			fmt.Fprintf(&builder, "%3s ", &piece)
+			if piece == Empty {
+				builder.WriteString(" .  ")
+			} else {
+				fmt.Fprintf(&builder, " %s  ", &piece)
+			}
 		}
-		fmt.Fprintf(&builder, "\n")
+		builder.WriteString("|\n")
 	}
 
-	fmt.Fprintf(&builder, "\n   ")
+	builder.WriteString("  +---------------------------------+\n")
 
-	for file := FileA; file <= FileH; file++ {
-		fmt.Fprintf(&builder, "%3c", 'a'+file)
-	}
+	builder.WriteString("     a   b   c   d   e   f   g   h\n\n")
 
-	fmt.Fprintf(&builder, "\n")
-
-	fmt.Fprintf(&builder, "Side: %s", &b.Side)
-	fmt.Fprintf(&builder, "En Passant: %s", &b.EnPassant)
-	fmt.Fprintf(&builder, "Castle: %s", &b.CastleBit)
-	fmt.Fprintf(&builder, "Position Key: %x\n", b.PositionKey)
+	fmt.Fprintf(&builder, "Side To Move : %s\n", &b.Side)
+	fmt.Fprintf(&builder, "En Passant   : %s\n", &b.EnPassant)
+	fmt.Fprintf(&builder, "Castling     : %s\n", &b.CastleBit)
+	fmt.Fprintf(&builder, "Pos Key      : %x\n", b.PositionKey)
 
 	return builder.String()
 }

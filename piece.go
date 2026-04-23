@@ -31,7 +31,7 @@ func (p *Piece) ValidEmpty() bool {
 
 func (p *Piece) String() string {
 	if p.Valid() {
-		return fmt.Sprintf("%d", PieceChar[*p])
+		return fmt.Sprintf("%c", PieceChar[*p])
 	}
 	return ""
 }
