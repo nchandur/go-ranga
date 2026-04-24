@@ -34,7 +34,7 @@ var IsRook = [13]bool{false, false, false, false, true, false, false, false, fal
 var IsQueen = [13]bool{false, false, false, false, false, true, false, false, false, false, false, true, false}
 var IsKing = [13]bool{false, false, false, false, false, false, true, false, false, false, false, false, true}
 
-var KnightDirections = [8]int{-21, -19, -12, -8, 8, 12, 19, -21}
+var KnightDirections = [8]int{-21, -19, -12, -8, 8, 12, 19, 21}
 var BishopDirections = [4]int{-11, -9, 9, 11}
 var RookDirections = [4]int{-10, -1, 1, 10}
 var KingDirections = [8]int{-11, -10, -9, -1, 1, 9, 10, 11} // also queen directions
