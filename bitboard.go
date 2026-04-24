@@ -9,8 +9,9 @@ type Bitboard uint64
 
 // pops least significant bit from bitboard
 func (b *Bitboard) PopBit() int {
+	res := bits.TrailingZeros64(uint64(*b))
 	*b &= (*b - 1)
-	return bits.TrailingZeros64(uint64(*b))
+	return res
 }
 
 // counts number of bits set to 1 in bitboard

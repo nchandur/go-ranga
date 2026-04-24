@@ -98,6 +98,11 @@ func (b *Board) ParseFen(fen string) error {
 		f := parts[3][0] - 'a'
 		r := parts[3][1] - '1'
 		b.EnPassant, err = FRTo120(File(f), Rank(r))
+
+		if err != nil{
+			return fmt.Errorf("failed to parse fen: %v", err)
+		}
+
 	}
 
 	if b.PositionKey, err = b.GeneratePositionKey(); err != nil {

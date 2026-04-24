@@ -121,8 +121,8 @@ func (s *Square) Valid() bool {
 	return *s >= 0 && *s < BOARD_SQ_NUM
 }
 
-func (s *Square) String() string{
-	if !s.IsOnBoard(){
+func (s *Square) String() string {
+	if !s.IsOnBoard() {
 		return ""
 	}
 
