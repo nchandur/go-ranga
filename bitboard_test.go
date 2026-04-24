@@ -8,19 +8,35 @@ func TestBitboardPop(t *testing.T) {
 		expected int
 		after    Bitboard
 	}{
-		{board: 0x0001, expected: 0, after: 0x0000},
-		{board: 0x0003, expected: 1, after: 0x0001},
+		{
+			board:    0x1,
+			expected: 0,
+			after:    0x0,
+		},
+		{
+			board:    0x3,
+			expected: 0,
+			after:    0x2,
+		},
+		{
+			board:    0x100,
+			expected: 8,
+			after:    0x0,
+		},
 	}
 
 	for _, test := range tests {
-		output := test.board.PopBit()
+		tempBoard := test.board
+		output := tempBoard.PopBit()
+		if output != test.expected {
+			t.Errorf("expected %d, want %d", output, test.expected)
+		}
 
-		if output != test.expected && test.board != test.after {
-			t.Errorf("expected sq: %d, output sq: %d, expected bitboard: %x, output bitboard: %x", test.expected, output, test.after, test.board)
+		if tempBoard != test.after {
+			t.Errorf("expected %x, want %x", tempBoard, test.after)
 		}
 	}
 }
-
 func TestBitboardCount(t *testing.T) {
 	tests := []struct {
 		board    Bitboard
