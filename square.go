@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type Square int
 
 const (
@@ -117,4 +119,12 @@ func (s *Square) IsOnBoard() bool {
 
 func (s *Square) Valid() bool {
 	return *s >= 0 && *s < BOARD_SQ_NUM
+}
+
+func (s *Square) String() string {
+	if !s.IsOnBoard() {
+		return ""
+	}
+
+	return fmt.Sprintf("%c%c", FileChar[FileBoard[*s]], RankChar[RankBoard[*s]])
 }

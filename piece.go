@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type Piece int
 
 const (
@@ -25,4 +27,15 @@ func (p *Piece) Valid() bool {
 
 func (p *Piece) ValidEmpty() bool {
 	return p.Valid() || *p == Empty
+}
+
+func (p *Piece) ValidEmptyOrOffBoard() bool {
+	return p.ValidEmpty() || *p == Offboard
+}
+
+func (p *Piece) String() string {
+	if p.Valid() {
+		return fmt.Sprintf("%c", PieceChar[*p])
+	}
+	return ""
 }
